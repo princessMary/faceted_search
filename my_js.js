@@ -1,11 +1,5 @@
 
 
-function getData(){
-  var my_data = data[0]["changeTime"];
-  document.getElementById("data").innerHTML = my_data;
-
-}
-
 function getList(){
 
   var x = document.getElementById("myText").value;
@@ -134,20 +128,20 @@ function printed(){
      pituus = 10;
    }
     for(i = 0;i < pituus; i++){
-        k+= '<div><strong>' + listed_text[i]["name"] + " (" + listed_text[i]["period"] + ") " + '</strong></div>';
-        // if (listed_text[i]["learning"].length>1){
-        //   k+= '<div>' + "Learning objectives: " + listed_text[i]["learning"] + '</div>';
-        // }
-        // k+= '<div style="color:SlateBlue;">' +"Credits: "+ listed_text[i]["credit"] + '</style></div>';
-        // if (listed_text[i]["level"].length>1){
-        //   k+= '<div style="color:DarkBlue;">' +"Course level: "+ listed_text[i]["level"] + '</style></div>';
-        // }
-        // if (listed_text[i]["tieto"].length>1){
-        //   k+= '<div style="color:DarkBlue;">' + listed_text[i]["tieto"] + '</style></div>';
-        // }
-        // if (listed_text[i]["period"].length>1){
-        //   k+= '<div style="color:Gray;">' +"Starts: "+ listed_text[i]["period"] + '</style></div>';
-        // }
+        k+= '<div><strong>' + listed_text[i]["name"] +  '</strong></div>';
+        if (listed_text[i]["learning"].length>1){
+          k+= '<div>' + "Learning objectives: " + listed_text[i]["learning"] + '</div>';
+        }
+        k+= '<div style="color:SlateBlue;">' +"Credits: "+ listed_text[i]["credit"] + '</style></div>';
+        if (listed_text[i]["level"].length>1){
+          k+= '<div style="color:DarkBlue;">' +"Course level: "+ listed_text[i]["level"] + '</style></div>';
+        }
+        if (listed_text[i]["tieto"].length>1){
+          k+= '<div style="color:DarkBlue;">' + listed_text[i]["tieto"] + '</style></div>';
+        }
+        if (listed_text[i]["period"].length>1){
+          k+= '<div style="color:Gray;">' +"Starts: "+ listed_text[i]["period"] + '</style></div>';
+        }
 
         k+= '<div>' +'<br>' + '</div>';
     }
