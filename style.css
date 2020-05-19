@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+body {
+  font-family: 'Muli', sans-serif;
+}
+
+.total-cost,
+.total {
+  border: none;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+strong {
+  font-weight: bold;
+}
