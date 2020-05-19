@@ -13,6 +13,11 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="my_js.js"></script>
 <script src="input.js"></script>
+<!-- <script src="extension.js"></script>
+<script src="makeList.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="vanilla.js"></script> -->
 
   <style>
 
@@ -100,7 +105,7 @@ div.rows {
 </div>
 <br>
 <div class="container">
-<button class="btn btn-primary" id="mybutton" type="submit" onclick=" print_list()">Search</button>
+<button class="btn btn-primary" id="mybutton" type="submit" onclick=" print_list(); plot()">Search</button>
 
 <div class = "myboc" id="printed_list"></div>
 
@@ -121,140 +126,142 @@ div.rows {
 
 calculateCheckbox();
 
-var input = document.getElementById("myText");
-input.addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-   event.preventDefault();
-   document.getElementById("mybutton").click();
-  }
-});
+function plot() {
+  var input = document.getElementById("myText");
+  input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+     event.preventDefault();
+     document.getElementById("mybutton").click();
+    }
+  });
 
 
-// var listed_text = getList();
-var listed_text = filter_list();
+  // var listed_text = getList();
+  var listed_text = filter_list();
 
-var new_keywords = ["creativity","sustainability", "entrepreneurship"];
-var wrapper = document.getElementById('secondCheck');
+  var new_keywords = ["creativity","sustainability", "entrepreneurship"];
+  var wrapper = document.getElementById('secondCheck');
 
-var myHTML = '';
+  var myHTML = '';
 
-var bsc = 0;
-var msc = 0;
-var dr = 0;
-var five_credicts = 0;
-var less_five = 0;
-var more_five = 0;
-var summer = 0;
-var autumn = 0;
-var spring = 0;
+  var bsc = 0;
+  var msc = 0;
+  var dr = 0;
+  var five_credicts = 0;
+  var less_five = 0;
+  var more_five = 0;
+  var summer = 0;
+  var autumn = 0;
+  var spring = 0;
 
 
-for (var i = 0; i < listed_text.length; i++) {
-
-  if (listed_text[i]["credit"].includes("5")){
-    five_credicts += 1;
-  }
-  if (listed_text[i]["credit"].startsWith("1 ") || listed_text[i]["credit"].startsWith("2") || listed_text[i]["credit"].startsWith("3")|| listed_text[i]["credit"].startsWith("4")){
-    less_five += 1;
-  }
-  if (listed_text[i]["credit"].startsWith("6") || listed_text[i]["credit"].startsWith("7") || listed_text[i]["credit"].startsWith("8")|| listed_text[i]["credit"].includes("10")){
-    more_five += 1;
-  }
-  if (listed_text[i]["level"].includes("Bachelor") || listed_text[i]["level"].includes("Basic") || listed_text[i]["level"].includes("bachelor")|| listed_text[i]["level"].includes("Kandidaattitaso")|| listed_text[i]["level"].includes("Kandidaattiopinnot")|| listed_text[i]["level"].includes("kandidaattiopinnot")){
-    bsc += 1;
-  }
-  if (listed_text[i]["level"].includes("Master") || listed_text[i]["level"].includes("Advanced")|| listed_text[i]["level"].includes("advanced")|| listed_text[i]["level"].includes("master")|| listed_text[i]["level"].includes("MSc")|| listed_text[i]["level"].includes("M.Sc.")|| listed_text[i]["level"].includes("syventävät")){
-    msc += 1;
-  }
-  if (listed_text[i]["level"].includes("Doctoral") || listed_text[i]["level"].includes("doctoral")|| listed_text[i]["level"].includes("post")|| listed_text[i]["level"].includes("jatko")){
-    dr += 1;
-  }
-  if (listed_text[i]["period"].includes("kesä") || listed_text[i]["period"].includes("summer")){
-    summer += 1;
-  }
-  if (listed_text[i]["period"].startsWith("II") || listed_text[i]["period"].startsWith("I")){
-    autumn += 1;
-  }
-  if (listed_text[i]["period"].startsWith("III") || listed_text[i]["period"].startsWith("IV")|| listed_text[i]["period"].startsWith("V")){
-    spring += 1;
-  }
-}
-
-var definitions = ['business',"workshop","media", "mathematics",'engineering', 'management', ' art ', 'technology', 'architecture', 'history', 'communication', 'materials', 'digital', 'urban', 'energy', 'physics', 'production', 'economics', 'structures', 'marketing'];
-sanakirja = {};
-for (var j = 0; j < definitions.length; j++) {
-  var value = 1;
-  var sana = definitions[j];
   for (var i = 0; i < listed_text.length; i++) {
-    var title = listed_text[i]["learning"].toLowerCase();
-    var title2 = listed_text[i]["name"].toLowerCase();
-    var title3 = listed_text[i]["description"].toLowerCase();
 
-    if (title.includes(sana) || title2.includes(sana) || title3.includes(sana)){
-      value += 1;
-      sanakirja[sana] = value;
+    if (listed_text[i]["credit"].includes("5")){
+      five_credicts += 1;
     }
-    else {
-      sanakirja[sana] = value;
+    if (listed_text[i]["credit"].startsWith("1 ") || listed_text[i]["credit"].startsWith("2") || listed_text[i]["credit"].startsWith("3")|| listed_text[i]["credit"].startsWith("4")){
+      less_five += 1;
+    }
+    if (listed_text[i]["credit"].startsWith("6") || listed_text[i]["credit"].startsWith("7") || listed_text[i]["credit"].startsWith("8")|| listed_text[i]["credit"].includes("10")){
+      more_five += 1;
+    }
+    if (listed_text[i]["level"].includes("Bachelor") || listed_text[i]["level"].includes("Basic") || listed_text[i]["level"].includes("bachelor")|| listed_text[i]["level"].includes("Kandidaattitaso")|| listed_text[i]["level"].includes("Kandidaattiopinnot")|| listed_text[i]["level"].includes("kandidaattiopinnot")){
+      bsc += 1;
+    }
+    if (listed_text[i]["level"].includes("Master") || listed_text[i]["level"].includes("Advanced")|| listed_text[i]["level"].includes("advanced")|| listed_text[i]["level"].includes("master")|| listed_text[i]["level"].includes("MSc")|| listed_text[i]["level"].includes("M.Sc.")|| listed_text[i]["level"].includes("syventävät")){
+      msc += 1;
+    }
+    if (listed_text[i]["level"].includes("Doctoral") || listed_text[i]["level"].includes("doctoral")|| listed_text[i]["level"].includes("post")|| listed_text[i]["level"].includes("jatko")){
+      dr += 1;
+    }
+    if (listed_text[i]["period"].includes("kesä") || listed_text[i]["period"].includes("summer")){
+      summer += 1;
+    }
+    if (listed_text[i]["period"].startsWith("II") || listed_text[i]["period"].startsWith("I")){
+      autumn += 1;
+    }
+    if (listed_text[i]["period"].startsWith("III") || listed_text[i]["period"].startsWith("IV")|| listed_text[i]["period"].startsWith("V")){
+      spring += 1;
     }
   }
-}
 
-// var items = sort_object(sanakirja);
-var items = sanakirja;
+  var definitions = ['business',"workshop","media", "mathematics",'engineering', 'management', ' art ', 'technology', 'architecture', 'history', 'communication', 'materials', 'digital', 'urban', 'energy', 'physics', 'production', 'economics', 'structures', 'marketing'];
+  sanakirja = {};
+  for (var j = 0; j < definitions.length; j++) {
+    var value = 1;
+    var sana = definitions[j];
+    for (var i = 0; i < listed_text.length; i++) {
+      var title = listed_text[i]["learning"].toLowerCase();
+      var title2 = listed_text[i]["name"].toLowerCase();
+      var title3 = listed_text[i]["description"].toLowerCase();
 
-myHTML+= '<div class="filter_boxes"><br><b>' + "Filter by keyword ("+ listed_text.length + " courses)" + '</b></div>';
-for (var key in items) {
-  // if (items[key]>10){
-  // message+= '<div class = "row"><small>' + key + " (" +sanakirja[key] +") "+'</small><input type="checkbox" value= ""  onclick="if(this.checked){textit()}">' + '</div>';
-  myHTML += '<span class="test">' + '<input name="monkey" type="checkbox" id="keywords" >'+ " " + key + " (" +items[key] +")   "+ "&emsp;" ;
-  if(key == "mathematics" || key == "technology"|| key == "materials"|| key == "production"){
-    myHTML +=' <br>';
+      if (title.includes(sana) || title2.includes(sana) || title3.includes(sana)){
+        value += 1;
+        sanakirja[sana] = value;
+      }
+      else {
+        sanakirja[sana] = value;
+      }
+    }
   }
+
+  // var items = sort_object(sanakirja);
+  var items = sanakirja;
+
+  myHTML+= '<div class="filter_boxes"><br><b>' + "Filter by keyword ("+ listed_text.length + " courses)" + '</b></div>';
+  for (var key in items) {
+    // if (items[key]>10){
+    // message+= '<div class = "row"><small>' + key + " (" +sanakirja[key] +") "+'</small><input type="checkbox" value= ""  onclick="if(this.checked){textit()}">' + '</div>';
+    myHTML += '<span class="test">' + '<input name="monkey" type="checkbox" id="keywords" >'+ " " + key + " (" +items[key] +")   "+ "&emsp;" ;
+    if(key == "mathematics" || key == "technology"|| key == "materials"|| key == "production"){
+      myHTML +=' <br>';
+    }
+    // }
+  }
+  myHTML +=' <br></br>';
+
+  myHTML+= '<div class="filter_boxes"><b>' + "Select courses by  "+ '</b></div>';
+  // if (five_credicts>0){
+    myHTML+= '<span class="filter_boxes">'+' <input name="animal" type="checkbox" id="firstCheck" value = "5">' +" 5 credits (" + five_credicts + ") "+ "&emsp;";
   // }
+  // if (less_five>0){
+    myHTML+= '<span class="filter_boxes">'+' <input name="animal" type="checkbox" id="lessfive" value = "4">'  +  " <5 credits (" + less_five + ") "+ "&emsp;";
+  // }
+  // if (more_five>0){
+    myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="morefive" value = "6">'  + " >5 credits (" + more_five + ") "+ "&emsp;";
+  // }
+  // if (bsc>0){
+  myHTML +=' <br>';
+    myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="bsc" value = "1">' + " BSc level (" + bsc + ") "+ "&emsp;" ;
+  // }
+  // if (msc > 0){
+    myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="msc" value = "2">'  +  " MSc level (" + msc + ") "+"&emsp;";
+  // }
+  // if (dr > 0){
+    myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="msc" value = "2">' +  " Dr level (" + msc + ") "+"&emsp;" ;
+  // }
+  // if (autumn > 0){
+  myHTML +=' <br>';
+  myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="autumn" value = "10">'  +  " during autumn (" + autumn + ") "+ "&emsp;";
+  // }
+  // if (spring > 0){
+  myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="spring" value = "11">' +  " during spring (" + spring + ") "+ "&emsp;" ;
+  // }
+  // if (summer > 0){
+  myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="summer" value = "12">'  +  " during summer (" + summer + ") "+ "&emsp;";
+
+  // }
+
+
+  myHTML+= '<div class="filter_boxes"><br><b>' + "How about something to do with? "+ '</b></div>';
+  for (var i = 0; i < new_keywords.length; i++) {
+    myHTML += '<span class="filter_boxes">' + '<input name="animal" type="checkbox" id="creativity"  value = "12">'+ "  "  +  new_keywords[i] + '</span>'  + "&emsp;";
+  }
+
+  wrapper.innerHTML = myHTML;
+
 }
-myHTML +=' <br></br>';
-
-myHTML+= '<div class="filter_boxes"><b>' + "Select courses by  "+ '</b></div>';
-// if (five_credicts>0){
-  myHTML+= '<span class="filter_boxes">'+' <input name="animal" type="checkbox" id="firstCheck" value = "5">' +" 5 credits (" + five_credicts + ") "+ "&emsp;";
-// }
-// if (less_five>0){
-  myHTML+= '<span class="filter_boxes">'+' <input name="animal" type="checkbox" id="lessfive" value = "4">'  +  " <5 credits (" + less_five + ") "+ "&emsp;";
-// }
-// if (more_five>0){
-  myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="morefive" value = "6">'  + " >5 credits (" + more_five + ") "+ "&emsp;";
-// }
-// if (bsc>0){
-myHTML +=' <br>';
-  myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="bsc" value = "1">' + " BSc level (" + bsc + ") "+ "&emsp;" ;
-// }
-// if (msc > 0){
-  myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="msc" value = "2">'  +  " MSc level (" + msc + ") "+"&emsp;";
-// }
-// if (dr > 0){
-  myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="msc" value = "2">' +  " Dr level (" + msc + ") "+"&emsp;" ;
-// }
-// if (autumn > 0){
-myHTML +=' <br>';
-myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="autumn" value = "10">'  +  " during autumn (" + autumn + ") "+ "&emsp;";
-// }
-// if (spring > 0){
-myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="spring" value = "11">' +  " during spring (" + spring + ") "+ "&emsp;" ;
-// }
-// if (summer > 0){
-myHTML+= '<span class="filter_boxes">' +' <input name="animal" type="checkbox" id="summer" value = "12">'  +  " during summer (" + summer + ") "+ "&emsp;";
-
-// }
-
-
-myHTML+= '<div class="filter_boxes"><br><b>' + "How about something to do with? "+ '</b></div>';
-for (var i = 0; i < new_keywords.length; i++) {
-  myHTML += '<span class="filter_boxes">' + '<input name="animal" type="checkbox" id="creativity"  value = "12">'+ "  "  +  new_keywords[i] + '</span>'  + "&emsp;";
-}
-
-wrapper.innerHTML = myHTML;
-
 
 function sort_object(obj) {
     items = Object.keys(obj).map(function(key) {
