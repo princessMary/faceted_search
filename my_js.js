@@ -442,7 +442,10 @@ function filter_list(){
     for (var k = 0; k < y.length; k++) {
       if (y[k].checked == true){
         for (var i = 0;i < course_dict.length; i++){
-          if (course_dict[i]["description"].includes(definitions[k]) ){
+          var title = course_dict[i]["learning"].toLowerCase();
+          var title2 = course_dict[i]["name"].toLowerCase();
+          var title3 = course_dict[i]["description"].toLowerCase();
+          if (title.includes(definitions[k]) || title2.includes(definitions[k]) || title3.includes(definitions[k])){
             monkey_list1.push(course_dict[i]);
           }
         }
@@ -472,71 +475,49 @@ function filter_list(){
     listed_text_tot.push(listed_text13);
 
     for (var i = 0; i < listed_text_tot.length; i++) {
-      if (listed_text_tot[i].length>1){
+      if (listed_text_tot[i].length>0){
         listed_text_tot2.push(listed_text_tot[i]);
       }
     }
     for (var i = 0; i < monkey_list.length; i++) {
-      if (monkey_list[i].length>1){
+      if (monkey_list[i].length>0){
         listed_text_tot2.push(monkey_list[i]);
       }
     }
     final_list = intersection(listed_text_tot2);
-    // if (final_list.length<10){
-    //   for (var h = 0; h < 5; h++) {
-    //     final_list.push(listed_text11[h]);
-    //     final_list.push(listed_text12[h]);
-    //     final_list.push(listed_text13[h]);
-    //   }
-    // }
-    // if (x[11].checked == true){
-    //   for (var h = 0; h < 5; h++) {
-    //     final_list.push(listed_text11[h]);
-    //   }
-    // }
-    // if (x[12].checked == true){
-    //   for (var h = 0; h < 5; h++) {
-    //     final_list.push(listed_text12[h]);
-    //   }
-    // }
-    // if (x[13].checked == true){
-    //   for (var h = 0; h < 5; h++) {
-    //     final_list.push(listed_text13[h]);
-    //   }
-    // }
   }
 
   return final_list;
 
 }
 
-
-function calculateCheckbox() {
-
-  var el = document.getElementById('firstCheck');
-  var products = el.getElementsByTagName('input');
-  var len = products.length;
-  // call updateCost() function to onclick event on every checkbox
-  for (var i = 0; i < len; i++) {
-    if (products[i].type === 'checkbox') {
-      products[i].onclick = updateCost;
-    }
-  }
-}
-function updateCost(e) {
-  // 'this' reffered to checkbox clicked on
-  var myForm = this.form;
-  // include current value in total-cost block, use parseFloat method to convert string to number
-  var val = parseFloat(myForm.elements['total-cost'].value);
-  // Add the checkbox value to total value if checkbox is checked
-  if (this.checked) {
-    val += parseFloat(this.value);
-  } else {
-    val -= parseFloat(this.value);
-  }
-  // update total-cost value with latest value
-  myForm.elements['total-cost'].value = val
-}
+//
+// function calculateCheckbox() {
+//
+//   var el = document.getElementById('firstCheck');
+//   var products = el.getElementsByTagName('input');
+//   var len = products.length;
+//   // call updateCost() function to onclick event on every checkbox
+//   for (var i = 0; i < len; i++) {
+//     if (products[i].type === 'checkbox') {
+//       products[i].onclick = updateCost;
+//     }
+//   }
+// }
+// function updateCost(e) {
+//   // 'this' reffered to checkbox clicked on
+//   var myForm = this.form;
+//   // include current value in total-cost block, use parseFloat method to convert string to number
+//   var val = parseFloat(myForm.elements['total-cost'].value);
+//   // Add the checkbox value to total value if checkbox is checked
+//   if (this.checked) {
+//     val += parseFloat(this.value);
+//   } else {
+//     val -= parseFloat(this.value);
+//   }
+//   // update total-cost value with latest value
+//   myForm.elements['total-cost'].value = val
+// }
 
 
 function print_list(){
