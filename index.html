@@ -7,18 +7,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="my_js.js"></script>
 <script src="input.js"></script>
-<script src="bubble.js"></script>
-<script src="makeList.js"></script>
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script src="vanilla.js"></script>
 
   <style>
 
@@ -36,45 +28,21 @@ div.myboccer {
   border-radius: 5px;
   margin-bottom: -33px;
 }
-div.mybocs {
-  border: 10px solid transparent;
-  /* background: #A7A7A7;
-  border-top-color: #A7A7A7; */
-  border-radius: 5px;
-  margin-bottom: -33px;
-}
 
-div.row {
- display:inline-block;
- width: 175px;
- border: 10px solid transparent;
- margin-left: 16.5px;
- /* background: #A7A7A7; */
- /* border-top-color: #A7A7A7; */
-
-}
 div.checkbox-custom {
   align-content: stretch;
   shape-margin: 100px;
-  /* width: 500px;
-  margin: auto;
-  border: 3px solid #73AD21; */
   background: #e6e8fa;
-
-
 
 }
 div.checkbox-custom2 {
   align-content: stretch;
   shape-margin: 100px;
-  /* width: 500px;
-  margin: auto;
-  border: 3px solid #73AD21; */
   background: white;
 
 }
 .wordwrap {
-   white-space: pre-wrap;      /* CSS3 */
+   white-space: pre-wrap;
 }
 
   </style>
@@ -100,20 +68,15 @@ div.checkbox-custom2 {
     <label class="form-check-label">
       <input name="animal" type="checkbox" class="form-check-input" id="english" value="15">Show only courses taught in English
     </label>
-
   </div>
-  <!-- <p class="total-cost">
-      <label>Total Cost: $ <input type="text" name="total-cost" class="total-cost" value="60.00" readonly="readonly" /></label>
-  </p> -->
 </form>
-<!-- <div class="checkboxes" id="filters" ></div> -->
 <br>
 <div class="filter_boxes checkbox-custom2" id = "secondCheck">
 
 </div>
 <br>
 <div class="container">
-<button class="btn btn-primary" id="mybutton" type="submit" onclick="chartTypeChanged();plot();">Search</button>
+<button class="btn btn-primary" id="mybutton" type="submit" onclick="dataChanged();">Search</button>
 <br>
 
 
@@ -123,15 +86,12 @@ div.checkbox-custom2 {
  <br>
 <!-- <canvas id="myChart"></canvas> -->
 
-
-<div id="chartContainer" style="height: 500px; width: 100%;"></div>
-
+<div id="chartContainer" style="height: 300px"></div>
+<!-- <div id="chartContainer" style="height: 500px; width: 100%;"></div> -->
 <br>
 
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script>
-// window.onload = function () {
 
+<script>
 
 function mur(courses) {
 
@@ -246,9 +206,6 @@ function mur(courses) {
   var chart = new CanvasJS.Chart("chartContainer", {
   	animationEnabled: true,
     padding: 100,
-  	// title:{
-  	// 	text: "Fertility Rate vs Life Expectancy in Different Countries - 2015"
-  	// },
   	axisX: {
   		title:"Teaching period",
       minimum: 0,
@@ -259,7 +216,7 @@ function mur(courses) {
       labelFontSize: 14,
   	},
   	axisY: {
-  		title:"Beginner -> -> -> -> -> -> -> -> Advanced",
+  		title:"Beginner -> Advanced",
       minimum: 0,
       maximum: 5,
       titleFontSize: 18,
@@ -301,40 +258,40 @@ function mur(courses) {
             }
           }
         }
-        // ,
-  			// { x: list_period[1], y: y_akseli[1], z:list_credits[1], indexLabel: list_names[1], name: learning[1], color: list_levels[1], legendText: levelt[1],
-        //   click: function(e){
-        //     var txt = "";
-        //     var index = 1;
-        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
-        //       if (home[index].length>1){
-        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
-        //       }
-        //       else {
-        //         txt += "<li>"+list_names[index]+"</li>"
-        //       }
-        //
-        //       document.getElementById("demo").innerHTML += txt;
-        //     }
-        //   }
-        // }
-        // ,
-  			// { x: list_period[2], y: y_akseli[2], z:list_credits[2], indexLabel: list_names[2], name: learning[2], color: list_levels[2], legendText: levelt[2],
-        //   click: function(e){
-        //     var txt = "";
-        //     var index =2;
-        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
-        //       if (home[index].length>1){
-        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
-        //       }
-        //       else {
-        //         txt += "<li>"+list_names[index]+"</li>"
-        //       }
-        //
-        //       document.getElementById("demo").innerHTML += txt;
-        //     }
-        //   }
-        // }
+        ,
+  			{ x: list_period[1], y: y_akseli[1], z:list_credits[1], indexLabel: list_names[1], name: learning[1], color: list_levels[1], legendText: levelt[1],
+          click: function(e){
+            var txt = "";
+            var index = 1;
+            if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+              if (home[index].length>1){
+                txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+              }
+              else {
+                txt += "<li>"+list_names[index]+"</li>"
+              }
+
+              document.getElementById("demo").innerHTML += txt;
+            }
+          }
+        }
+        ,
+  			{ x: list_period[2], y: y_akseli[2], z:list_credits[2], indexLabel: list_names[2], name: learning[2], color: list_levels[2], legendText: levelt[2],
+          click: function(e){
+            var txt = "";
+            var index =2;
+            if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+              if (home[index].length>1){
+                txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+              }
+              else {
+                txt += "<li>"+list_names[index]+"</li>"
+              }
+
+              document.getElementById("demo").innerHTML += txt;
+            }
+          }
+        }
         // ,
         // { x: list_period[3], y: y_akseli[3], z:list_credits[3], indexLabel: list_names[3], name: learning[3], color: list_levels[3], legendText: levelt[3],
         //   click: function(e){
@@ -460,12 +417,22 @@ function mur(courses) {
 
 }
 
+// var lista = getList();
+// var courses = filter_list(lista);
+// // print_list(courses);
+// mur(courses);
 
-function chartTypeChanged() {
+function dataChanged() {
 
   var lista = getList();
   var courses = filter_list(lista);
-  // plot();
+  plot();
+  return courses;
+
+}
+function chartTypeChanged() {
+
+  var courses = dataChanged();
   print_list(courses);
   var chart = mur(courses);
   chart.update();
@@ -473,22 +440,19 @@ function chartTypeChanged() {
 }
 
 var button = document.getElementById( "mybutton" );
-button.addEventListener( "click",  chartTypeChanged);
+// button.addEventListener( "click",  chartTypeChanged);
+button.addEventListener('click',() => {
+  dataChanged();
+  chartTypeChanged();
+});
 
-
-</script>
-<div class = "myboc">
-  <h3> My courses </h3>
-<ul id="demo"></ul>
-</div>
-<script>
 
 var input = document.getElementById("myText");
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
    document.getElementById("mybutton").click();
-   print_list();
+   // print_list();
   }
 });
 
@@ -624,6 +588,12 @@ function sort_object(obj) {
  }
 
 </script>
+
+<div class = "myboc">
+  <h3> My courses </h3>
+<ul id="demo"></ul>
+</div>
+
 
 <br>
 <br>
