@@ -76,7 +76,7 @@ div.checkbox-custom2 {
 </div>
 <br>
 <div class="container">
-<button class="btn btn-primary" id="mybutton" type="submit" onclick="dataChanged();">Search</button>
+<button class="btn btn-primary" id="mybutton" type="submit" onclick="chartTypeChanged()">Search</button>
 <br>
 
 
@@ -131,7 +131,7 @@ function mur(courses) {
   var art = "rgb(255, 163, 0)";
   var other = "rgb(100, 100, 100)";
 
-  for(var i = 0;i < 10; i++){
+  for(var i = 0;i < 3; i++){
     list_names.push(courses[i]["name"]);
     learning.push(courses[i]["learning"]);
     levelt.push(courses[i]["level"]);
@@ -417,10 +417,6 @@ function mur(courses) {
 
 }
 
-// var lista = getList();
-// var courses = filter_list(lista);
-// // print_list(courses);
-// mur(courses);
 
 function dataChanged() {
 
@@ -433,7 +429,7 @@ function dataChanged() {
 function chartTypeChanged() {
 
   var courses = dataChanged();
-  print_list(courses);
+  // print_list(courses);
   var chart = mur(courses);
   chart.update();
   chart.render();
@@ -598,7 +594,7 @@ function sort_object(obj) {
 <br>
 <br>
 <!-- <div class = "myboc" id="tableData"></div> -->
-<div class = "myboccer" id="printed_list"></div>
+<!-- <div class = "myboccer" id="printed_list"></div> -->
 
 </body>
 </html>
