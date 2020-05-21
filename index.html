@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>Faceted course search</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="my_js.js"></script>
+<script src="input.js"></script>
+<script src="bubble.js"></script>
+<script src="makeList.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="vanilla.js"></script>
+
+  <style>
+
+div.myboc {
+  border: 33px solid transparent;
+  background: #ffa57d;
+  border-top-color: #ffa57d;
+  border-radius: 5px;
+  margin-bottom: -33px;
+}
+div.myboccer {
+  border: 33px solid transparent;
+  background: #e6e8fa;
+  border-top-color: #e6e8fa;
+  border-radius: 5px;
+  margin-bottom: -33px;
+}
+div.mybocs {
+  border: 10px solid transparent;
+  /* background: #A7A7A7;
+  border-top-color: #A7A7A7; */
+  border-radius: 5px;
+  margin-bottom: -33px;
+}
+
+div.row {
+ display:inline-block;
+ width: 175px;
+ border: 10px solid transparent;
+ margin-left: 16.5px;
+ /* background: #A7A7A7; */
+ /* border-top-color: #A7A7A7; */
+
+}
+div.checkbox-custom {
+  align-content: stretch;
+  shape-margin: 100px;
+  /* width: 500px;
+  margin: auto;
+  border: 3px solid #73AD21; */
+  background: #e6e8fa;
+
+
+
+}
+div.checkbox-custom2 {
+  align-content: stretch;
+  shape-margin: 100px;
+  /* width: 500px;
+  margin: auto;
+  border: 3px solid #73AD21; */
+  background: white;
+
+}
+.wordwrap {
+   white-space: pre-wrap;      /* CSS3 */
+}
+
+  </style>
+
+
+</head>
+<body>
+
+<br>
+  <h1 class="form-group container" >Course search</h1>
+  <p class = "container"> Search by keyword(s) and/or by filter(s). Press "Search" to see all courses. </p>
+  <div class="container" >
+    <div class="input-group-prepend">
+    <input type="text" id="myText" class="form-control" value = "" placeholder="Search by keyword(s)">
+  </div>
+<br>
+  <form>
+  <div class="form-check checkbox-custom2" id="firstCheck">
+    <label class="form-check-label">
+      <input name="animal" type="checkbox" class="form-check-input" id="completeBeginner" value="16">I'm a beginner
+    </label>
+        <br>
+    <label class="form-check-label">
+      <input name="animal" type="checkbox" class="form-check-input" id="english" value="15">Show only courses taught in English
+    </label>
+
+  </div>
+  <!-- <p class="total-cost">
+      <label>Total Cost: $ <input type="text" name="total-cost" class="total-cost" value="60.00" readonly="readonly" /></label>
+  </p> -->
+</form>
+<!-- <div class="checkboxes" id="filters" ></div> -->
+<br>
+<div class="filter_boxes checkbox-custom2" id = "secondCheck">
+
+</div>
+<br>
+<div class="container">
+<button class="btn btn-primary" id="mybutton" type="submit" onclick="chartTypeChanged();plot();">Search</button>
+<br>
+
+
+   <br>
+ <!-- <div id="chartContainer" style="height: 300px; width: 100%;"> -->
+ </div>
+ <br>
+<!-- <canvas id="myChart"></canvas> -->
+
+
+<div id="chartContainer" style="height: 500px; width: 100%;"></div>
+
+<br>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+// window.onload = function () {
+
+
+function mur(courses) {
+
+  var list_names = [];
+  var list_credits = [];
+  var list_levels = [];
+  var list_period = [];
+  var learning = [];
+  var levelt = [];
+  var description = [];
+  var kieli = [];
+  var code = [];
+  var home = [];
+  var tieto = [];
+  var pre = [];
+  var period1 = 1;
+  var period2 = 2;
+  var period3 = 3;
+  var period4 = 4;
+  var period5 = 5;
+  var oter = 4.5;
+  var aut = 1.5;
+  var spr = 3.5;
+  var sum = 5.5;
+  var y_akseli = [];
+  var rak_list = ["ENG", "KJR", "MEC", "EEN", "AAN", "KON", "AAE", "ENE", "MEK", "GIS", "YYT", "REC", "ENY", "MAA", "RYM", "WAT", "SPT", "CIV", "GEO", "RAK"];
+  var art_list = ["MAR", "ARK", "ART", "SARK", "UWAS", "TAI", "ARTS", "ELO", "MUO", "DOM", "AUWAS"];
+  var bsc_level = 2;
+  var msc_level = 3;
+  var advanced = 4;
+  var basics = 1;
+  var chem = "rgb(0, 150, 94)";
+  var bus = "rgb(120, 190, 32)";
+  var elec = "rgb(125, 85, 199)";
+  var eng = "rgb(187, 22, 163)";
+  var sci = "rgb(255, 103, 31)";
+  var art = "rgb(255, 163, 0)";
+  var other = "rgb(100, 100, 100)";
+
+  for(var i = 0;i < 10; i++){
+    list_names.push(courses[i]["name"]);
+    learning.push(courses[i]["learning"]);
+    levelt.push(courses[i]["level"]);
+    tieto.push(courses[i]["tieto"]);
+    pre.push(courses[i]["pre"]);
+    kieli.push(courses[i]["kieli"]);
+    code.push(courses[i]["code"]);
+    home.push(courses[i]["home"]);
+    description.push(courses[i]["description"]);
+    list_credits.push(courses[i]["credit"]);
+    if (courses[i]["code"].includes("chem") || courses[i]["code"].includes("ke")|| courses[i]["code"].includes("JOIN")){
+      list_levels.push(chem);
+    }
+    else if (courses[i]["code"].startsWith(2)){
+      list_levels.push(bus);
+    }
+    else if (courses[i]["code"].startsWith("CS") || courses[i]["code"].startsWith("PHYS")|| courses[i]["code"].startsWith("TU")|| courses[i]["code"].startsWith("NBE")){
+      list_levels.push(sci);
+    }
+    else if (courses[i]["code"].startsWith("ELEC")){
+      list_levels.push(elec);
+    }
+    else if (arrayContainsArray(courses[i]["code"],rak_list)){
+      list_levels.push(eng);
+    }
+    else if (arrayContainsArray(courses[i]["code"],art_list)){
+      list_levels.push(art);
+    }
+    else {
+      list_levels.push(other);
+    }
+    if (courses[i]["level"].includes("Bachelor")){
+      y_akseli.push(bsc_level);
+    }
+    else if (courses[i]["level"].includes("Master")){
+      y_akseli.push(msc_level);
+    }
+    else if (courses[i]["level"].includes("Advanced")){
+      y_akseli.push(advanced);
+    }
+
+    if (courses[i]["period"].includes("Autumn")){
+      list_period.push(aut);
+    }
+    else if (courses[i]["period"].includes("Spring")){
+      list_period.push(spr);
+    }
+    else if (courses[i]["period"].includes("Summer") || courses[i]["period"].includes("summer")){
+      list_period.push(sum);
+    }
+    else if (courses[i]["period"].includes("V")){
+      list_period.push(period5);
+    }
+    else if (courses[i]["period"].includes("IV")){
+      list_period.push(period4);
+    }
+    else if (courses[i]["period"].includes("III")){
+      list_period.push(period3);
+    }
+    else if (courses[i]["period"].includes("II")){
+      list_period.push(period2);
+    }
+    else if (courses[i]["period"].includes("I")){
+      list_period.push(period1);
+    }
+    else {
+      y_akseli.push(basic);
+      list_period.push(6);
+    }
+  }
+
+  var chart = new CanvasJS.Chart("chartContainer", {
+  	animationEnabled: true,
+    padding: 100,
+  	// title:{
+  	// 	text: "Fertility Rate vs Life Expectancy in Different Countries - 2015"
+  	// },
+  	axisX: {
+  		title:"Teaching period",
+      minimum: 0,
+      maximum: 6,
+      interval: 1,
+      titleFontSize: 18,
+      titleFontWeight: "bold",
+      labelFontSize: 14,
+  	},
+  	axisY: {
+  		title:"Beginner -> -> -> -> -> -> -> -> Advanced",
+      minimum: 0,
+      maximum: 5,
+      titleFontSize: 18,
+      titleFontWeight: "bold",
+      gridThickness: 0,
+      tickLength: 0,
+      lineThickness: 0,
+      labelFormatter: function(){
+      return " ";
+    }
+  	},
+  	legend:{
+  		horizontalAlign: "left"
+  	},
+  	data: [{
+  		type: "bubble",
+      indexLabelFontSize: 15,
+      indexLabelFontFamily: "calibri",
+  		showInLegend: true,
+  		legendText: "Color of Bubble Represents Schools",
+  		legendMarkerType: "circle",
+  		legendMarkerColor: "grey",
+  		toolTipContent: "<div style='max-width:400px;' class='wordwrap'><b>{indexLabel}</b><br/><i>{name}</i><br/><b>Credits: {z}cr</b><br/><b>Level: {legendText}</b></div>",
+  		dataPoints: [
+  			// { x: 1, y: 2.4, z: 5 , name: courses[0]["name"]},
+  			// { x: 2, y: 1.57, z: 4, name: list_names[0]},
+  			{ x: list_period[0], y: y_akseli[0], z:list_credits[0], indexLabel: list_names[0], name: learning[0], color: list_levels[0], legendText: levelt[0],
+          click: function(e){
+            var txt = "";
+            var index = 0;
+            if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+              if (home[index].length>1){
+                txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+              }
+              else {
+                txt += "<li>"+list_names[index]+"</li>"
+              }
+              document.getElementById("demo").innerHTML += txt;
+            }
+          }
+        }
+        // ,
+  			// { x: list_period[1], y: y_akseli[1], z:list_credits[1], indexLabel: list_names[1], name: learning[1], color: list_levels[1], legendText: levelt[1],
+        //   click: function(e){
+        //     var txt = "";
+        //     var index = 1;
+        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+        //       if (home[index].length>1){
+        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+        //       }
+        //       else {
+        //         txt += "<li>"+list_names[index]+"</li>"
+        //       }
+        //
+        //       document.getElementById("demo").innerHTML += txt;
+        //     }
+        //   }
+        // }
+        // ,
+  			// { x: list_period[2], y: y_akseli[2], z:list_credits[2], indexLabel: list_names[2], name: learning[2], color: list_levels[2], legendText: levelt[2],
+        //   click: function(e){
+        //     var txt = "";
+        //     var index =2;
+        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+        //       if (home[index].length>1){
+        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+        //       }
+        //       else {
+        //         txt += "<li>"+list_names[index]+"</li>"
+        //       }
+        //
+        //       document.getElementById("demo").innerHTML += txt;
+        //     }
+        //   }
+        // }
+        // ,
+        // { x: list_period[3], y: y_akseli[3], z:list_credits[3], indexLabel: list_names[3], name: learning[3], color: list_levels[3], legendText: levelt[3],
+        //   click: function(e){
+        //     var txt = "";
+        //     var index = 3;
+        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+        //       if (home[index].length>1){
+        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+        //       }
+        //       else {
+        //         txt += "<li>"+list_names[index]+"</li>"
+        //       }
+        //
+        //       document.getElementById("demo").innerHTML += txt;
+        //     }
+        //   }
+        // }
+        // ,
+        // { x: list_period[4], y: y_akseli[4], z:list_credits[4], indexLabel: list_names[4], name: learning[4], color: list_levels[4], legendText: levelt[4],
+        //   click: function(e){
+        //     var txt = "";
+        //     var index = 4;
+        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+        //       if (home[index].length>1){
+        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+        //       }
+        //       else {
+        //         txt += "<li>"+list_names[index]+"</li>"
+        //       }
+        //
+        //       document.getElementById("demo").innerHTML += txt;
+        //     }
+        //   }
+        // }
+        // ,
+        // { x: list_period[5], y: y_akseli[5], z:list_credits[5], indexLabel: list_names[5], name: learning[5], color: list_levels[5], legendText: levelt[5],
+        //   click: function(e){
+        //     var txt = "";
+        //     var index = 5;
+        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+        //       if (home[index].length>1){
+        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+        //       }
+        //       else {
+        //         txt += "<li>"+list_names[index]+"</li>"
+        //       }
+        //
+        //       document.getElementById("demo").innerHTML += txt;
+        //     }
+        //   }
+        // }
+        // ,
+        // { x: list_period[6], y: y_akseli[6], z:list_credits[6], indexLabel: list_names[6], name: learning[6], color: list_levels[6], legendText: levelt[6],
+        //   click: function(e){
+        //     var txt = "";
+        //     var index = 6;
+        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+        //       if (home[index].length>1){
+        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+        //       }
+        //       else {
+        //         txt += "<li>"+list_names[index]+"</li>"
+        //       }
+        //
+        //       document.getElementById("demo").innerHTML += txt;
+        //     }
+        //   }
+        // },
+  			// { x: list_period[7], y: y_akseli[7], z:list_credits[7], indexLabel: list_names[7], name: learning[7], color: list_levels[7], legendText: levelt[7],
+        //   click: function(e){
+        //     var txt = "";
+        //     var index = 7;
+        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+        //       if (home[index].length>1){
+        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+        //       }
+        //       else {
+        //         txt += "<li>"+list_names[index]+"</li>"
+        //       }
+        //
+        //       document.getElementById("demo").innerHTML += txt;
+        //     }
+        //   }
+        // },
+  			// { x: list_period[8], y: y_akseli[8], z:list_credits[8], indexLabel: list_names[8], name: learning[8], color: list_levels[8], legendText: levelt[8],
+        //   click: function(e){
+        //     var txt = "";
+        //     var index = 8;
+        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+        //       if (home[index].length>1){
+        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+        //       }
+        //       else {
+        //         txt += "<li>"+list_names[index]+"</li>"
+        //       }
+        //
+        //       document.getElementById("demo").innerHTML += txt;
+        //     }
+        //   }
+        // },
+        // { x: list_period[9], y: y_akseli[9], z:list_credits[9], indexLabel: list_names[9], name: learning[9], color: list_levels[9], legendText: levelt[9],
+        //   click: function(e){
+        //     var txt = "";
+        //     var index = 9;
+        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+        //       if (home[index].length>1){
+        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+        //       }
+        //       else {
+        //         txt += "<li>"+list_names[index]+"</li>"
+        //       }
+        //
+        //       document.getElementById("demo").innerHTML += txt;
+        //     }
+        //   }
+        // }
+
+  		]
+  	}]
+  });
+  chart.render();
+  return chart;
+
+}
+
+
+function chartTypeChanged() {
+
+  var lista = getList();
+  var courses = filter_list(lista);
+  // plot();
+  print_list(courses);
+  var chart = mur(courses);
+  chart.update();
+  chart.render();
+}
+
+var button = document.getElementById( "mybutton" );
+button.addEventListener( "click",  chartTypeChanged);
+
+
+</script>
+<div class = "myboc">
+  <h3> My courses </h3>
+<ul id="demo"></ul>
+</div>
+<script>
+
+var input = document.getElementById("myText");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("mybutton").click();
+   print_list();
+  }
+});
+
+function plot() {
+  // var listed_text = getList();
+  var lista = getList()
+  var listed_text = filter_list(lista);
+
+
+  var new_keywords = ["creativity","sustainability", "entrepreneurship"];
+  var wrapper = document.getElementById('secondCheck');
+
+  var myHTML = '';
+
+  var bsc = 0;
+  var msc = 0;
+  var dr = 0;
+  var five_credicts = 0;
+  var less_five = 0;
+  var more_five = 0;
+  var summer = 0;
+  var autumn = 0;
+  var spring = 0;
+
+
+  for (var i = 0; i < listed_text.length; i++) {
+
+    if (listed_text[i]["credit"].includes("5")){
+      five_credicts += 1;
+    }
+    if (listed_text[i]["credit"].startsWith("1 ") || listed_text[i]["credit"].startsWith("2") || listed_text[i]["credit"].startsWith("3")|| listed_text[i]["credit"].startsWith("4")){
+      less_five += 1;
+    }
+    if (listed_text[i]["credit"].startsWith("6") || listed_text[i]["credit"].startsWith("7") || listed_text[i]["credit"].startsWith("8")|| listed_text[i]["credit"].includes("10")){
+      more_five += 1;
+    }
+    if (listed_text[i]["level"].includes("Bachelor") || listed_text[i]["level"].includes("Basic") || listed_text[i]["level"].includes("bachelor")|| listed_text[i]["level"].includes("Kandidaattitaso")|| listed_text[i]["level"].includes("Kandidaattiopinnot")|| listed_text[i]["level"].includes("kandidaattiopinnot")){
+      bsc += 1;
+    }
+    if (listed_text[i]["level"].includes("Master") || listed_text[i]["level"].includes("Advanced")|| listed_text[i]["level"].includes("advanced")|| listed_text[i]["level"].includes("master")|| listed_text[i]["level"].includes("MSc")|| listed_text[i]["level"].includes("M.Sc.")|| listed_text[i]["level"].includes("syventävät")){
+      msc += 1;
+    }
+    if (listed_text[i]["level"].includes("Doctoral") || listed_text[i]["level"].includes("doctoral")|| listed_text[i]["level"].includes("post")|| listed_text[i]["level"].includes("jatko")){
+      dr += 1;
+    }
+    if (listed_text[i]["period"].includes("kesä") || listed_text[i]["period"].includes("summer")){
+      summer += 1;
+    }
+    if (listed_text[i]["period"].startsWith("II") || listed_text[i]["period"].startsWith("I")){
+      autumn += 1;
+    }
+    if (listed_text[i]["period"].startsWith("III") || listed_text[i]["period"].startsWith("IV")|| listed_text[i]["period"].startsWith("V")){
+      spring += 1;
+    }
+  }
+
+  var definitions = ['business',"workshop","media", "mathematics",'engineering', 'management', ' art ', 'technology', 'architecture', 'history', 'communication', 'materials', 'digital', 'urban', 'energy', 'physics', 'production', 'economics', 'structures', 'marketing'];
+  sanakirja = {};
+  for (var j = 0; j < definitions.length; j++) {
+    var value = 0;
+    var sana = definitions[j];
+    for (var i = 0; i < listed_text.length; i++) {
+      var title = listed_text[i]["learning"].toLowerCase();
+      var title2 = listed_text[i]["name"].toLowerCase();
+      var title3 = listed_text[i]["description"].toLowerCase();
+
+      if (title.includes(sana) || title2.includes(sana) || title3.includes(sana)){
+        value += 1;
+        sanakirja[sana] = value;
+      }
+      else {
+        sanakirja[sana] = value;
+      }
+    }
+  }
+
+  // var items = sort_object(sanakirja);
+  var items = sanakirja;
+
+  myHTML+= '<div class="checkbox-custom"><b>' + "Filter by keyword ("+ listed_text.length + " courses)" + '</b></div>';
+  for (var key in items) {
+    // if (items[key]>10){
+    myHTML += '<span class="checkbox-custom">' + '<input name="monkey" type="checkbox" id="keywords" >'+ " " + key + " (" +items[key] +")   "+ "&emsp;" ;
+    if(key == "mathematics" || key == "technology"|| key == "materials"|| key == "production"){
+      myHTML +=' <br>';
+    }
+    // }
+  }
+  myHTML +=' <br></br>';
+  myHTML+= '<div class="checkbox-custom"><b>' + "Select courses by  "+ '</b></div>';
+  myHTML+= '<span class="checkbox-custom">'+' <input name="animal" type="checkbox" id="firstCheck" value = "5">' +" 5 credits (" + five_credicts + ") "+ "&emsp;";
+  myHTML+= '<span class="checkbox-custom">'+' <input name="animal" type="checkbox" id="lessfive" value = "4">'  +  " <5 credits (" + less_five + ") "+ "&emsp;";
+  myHTML+= '<span class="checkbox-custom">' +' <input name="animal" type="checkbox" id="morefive" value = "6">'  + " >5 credits (" + more_five + ") "+ "&emsp;";
+  myHTML +=' <br>';
+  myHTML+= '<span class="checkbox-custom">' +' <input name="animal" type="checkbox" id="bsc" value = "1">' + " BSc level (" + bsc + ") "+ "&emsp;" ;
+  myHTML+= '<span class="checkbox-custom">' +' <input name="animal" type="checkbox" id="msc" value = "2">'  +  " MSc level (" + msc + ") "+"&emsp;";
+  myHTML+= '<span class="checkbox-custom">' +' <input name="animal" type="checkbox" id="msc" value = "2">' +  " Dr level (" + msc + ") "+"&emsp;" ;
+  myHTML +=' <br>';
+  myHTML+= '<span class="checkbox-custom">' +' <input name="animal" type="checkbox" id="autumn" value = "10">'  +  " during autumn (" + autumn + ") "+ "&emsp;";
+  myHTML+= '<span class="checkbox-custom">' +' <input name="animal" type="checkbox" id="spring" value = "11">' +  " during spring (" + spring + ") "+ "&emsp;" ;
+  myHTML+= '<span class="checkbox-custom">' +' <input name="animal" type="checkbox" id="summer" value = "12">'  +  " during summer (" + summer + ") "+ "&emsp;";
+  myHTML +=' <br></br>';
+  myHTML+= '<div class="checkbox-custom"><b>' + "How about something to do with? "+ '</b></div>';
+  for (var i = 0; i < new_keywords.length; i++) {
+    myHTML += '<span class="checkbox-custom">' + '<input name="animal" type="checkbox" id="creativity"  value = "12">'+ "  "  +  new_keywords[i] + '</span>'  + "&emsp;";
+  }
+
+  wrapper.innerHTML = myHTML;
+
+}
+plot();
+
+function sort_object(obj) {
+    items = Object.keys(obj).map(function(key) {
+        return [key, obj[key]];
+    });
+    items.sort(function(first, second) {
+        return second[1] - first[1];
+    });
+    sorted_obj={}
+    $.each(items, function(k, v) {
+        use_key = v[0]
+        use_value = v[1]
+        sorted_obj[use_key] = use_value
+    })
+    return(sorted_obj)
+}
+
+ function arrayContainsArray(superset, subset) {
+   return subset.some(function (value) {
+     return (superset.indexOf(value) >= 0);
+   });
+ }
+
+</script>
+
+<br>
+<br>
+<!-- <div class = "myboc" id="tableData"></div> -->
+<div class = "myboccer" id="printed_list"></div>
+
+</body>
+</html>
