@@ -1,36 +1,36 @@
-
-function extension(searchWord){
-  var result;
-  if (/s$/.test(searchWord)){
-    searchWord = searchWord.substring(0, searchWord.length - 1);
-    result = searchWord;
-  }
-  else if (/al$/.test(searchWord)){
-    searchWord = searchWord.substring(0, searchWord.length - 3);
-    result = searchWord;
-  }
-  else if (/ic$/.test(searchWord)){
-    searchWord = searchWord.substring(0, searchWord.length - 2);
-    result = searchWord;
-  }
-  else if (/ility$/.test(searchWord)){
-    searchWord = searchWord.substring(0, searchWord.length - 5);
-    result = searchWord;
-  }
-  else if (/ity$/.test(searchWord)){
-    searchWord = searchWord.substring(0, searchWord.length - 3);
-    result = searchWord;
-  }
-  else if (/ment$/.test(searchWord)){
-    searchWord = searchWord.substring(0, searchWord.length - 4);
-    result = searchWord;
-  }
-  else {
-    result = searchWord;
-  }
-
-  return result;
-}
+//
+// function extension(searchWord){
+//   var result;
+//   if (/s$/.test(searchWord)){
+//     searchWord = searchWord.substring(0, searchWord.length - 1);
+//     result = searchWord;
+//   }
+//   else if (/al$/.test(searchWord)){
+//     searchWord = searchWord.substring(0, searchWord.length - 3);
+//     result = searchWord;
+//   }
+//   else if (/ic$/.test(searchWord)){
+//     searchWord = searchWord.substring(0, searchWord.length - 2);
+//     result = searchWord;
+//   }
+//   else if (/ility$/.test(searchWord)){
+//     searchWord = searchWord.substring(0, searchWord.length - 5);
+//     result = searchWord;
+//   }
+//   else if (/ity$/.test(searchWord)){
+//     searchWord = searchWord.substring(0, searchWord.length - 3);
+//     result = searchWord;
+//   }
+//   else if (/ment$/.test(searchWord)){
+//     searchWord = searchWord.substring(0, searchWord.length - 4);
+//     result = searchWord;
+//   }
+//   else {
+//     result = searchWord;
+//   }
+//
+//   return result;
+// }
 
 
 function get_keyword(){
@@ -106,17 +106,19 @@ function getList(){
     D = D + text_length + description.length + title.length;
 
     if (!(word.includes(","))){
-      var words = extension(word);
-      TF += description.split(words).length - 1;
-      TF += learn.split(words).length - 1;
-      TF += (title.split(words).length - 1)*10;
+      // var words = extension(word);
+      TF += description.split(word).length - 1;
+      TF += learn.split(word).length - 1;
+      // TF += (title.split(word).length - 1)*10;
+      TF += title.split(word).length - 1;
     }
     else {
       for (var h = 0; h < partsOfWord.length; h++) {
-        var words = extension(partsOfWord[h]);
-        TF += description.split(words).length - 1;
-        TF += learn.split(words).length - 1;
-        TF += (title.split(words).length - 1)*10;
+        // var words = extension(partsOfWord[h]);
+        TF += description.split(partsOfWord[h]).length - 1;
+        TF += learn.split(partsOfWord[h]).length - 1;
+        TF += title.split(partsOfWord[h]).length - 1;
+        // TF += (title.split(partsOfWord[h]).length - 1)*10;
       }
     }
 
