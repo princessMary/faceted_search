@@ -76,7 +76,7 @@ div.checkbox-custom2 {
 </div>
 <br>
 <div class="container">
-<button class="btn btn-primary" id="mybutton" type="submit" onclick="chartTypeChanged(); plot();">Search</button>
+<button class="btn btn-primary" id="mybutton" type="submit" onclick="chartTypeChanged()">Search</button>
 <br>
 
 
@@ -86,7 +86,7 @@ div.checkbox-custom2 {
  <br>
 <!-- <canvas id="myChart"></canvas> -->
 
-<div id="chartContainer" style="height: 300px"></div>
+<div id="chartContainer" style="height: 500px"></div>
 <!-- <div id="chartContainer" style="height: 500px; width: 100%;"></div> -->
 <br>
 
@@ -131,7 +131,7 @@ function mur(courses) {
   var art = "rgb(255, 163, 0)";
   var other = "rgb(100, 100, 100)";
 
-  for(var i = 0;i < 3; i++){
+  for(var i = 0;i < 10; i++){
     list_names.push(courses[i]["name"]);
     learning.push(courses[i]["learning"]);
     levelt.push(courses[i]["level"]);
@@ -164,13 +164,16 @@ function mur(courses) {
       list_levels.push(other);
     }
     if (courses[i]["level"].includes("Bachelor")){
-      y_akseli.push(bsc_level);
+      var arvo = Math.random();
+      y_akseli.push(bsc_level+arvo);
     }
     else if (courses[i]["level"].includes("Master")){
-      y_akseli.push(msc_level);
+      var arvo = Math.random();
+      y_akseli.push(msc_level+arvo);
     }
     else if (courses[i]["level"].includes("Advanced")){
-      y_akseli.push(advanced);
+      var arvo = Math.random();
+      y_akseli.push(advanced +arvo);
     }
 
     if (courses[i]["period"].includes("Autumn")){
@@ -198,7 +201,8 @@ function mur(courses) {
       list_period.push(period1);
     }
     else {
-      y_akseli.push(basic);
+      var arvo = Math.random();
+      y_akseli.push(basic +arvo);
       list_period.push(6);
     }
   }
@@ -216,7 +220,7 @@ function mur(courses) {
       labelFontSize: 14,
   	},
   	axisY: {
-  		title:"Beginner -> Advanced",
+  		title:"Beginner -> -> -> -> -> Advanced",
       minimum: 0,
       maximum: 5,
       titleFontSize: 18,
@@ -292,122 +296,122 @@ function mur(courses) {
             }
           }
         }
-        // ,
-        // { x: list_period[3], y: y_akseli[3], z:list_credits[3], indexLabel: list_names[3], name: learning[3], color: list_levels[3], legendText: levelt[3],
-        //   click: function(e){
-        //     var txt = "";
-        //     var index = 3;
-        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
-        //       if (home[index].length>1){
-        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
-        //       }
-        //       else {
-        //         txt += "<li>"+list_names[index]+"</li>"
-        //       }
-        //
-        //       document.getElementById("demo").innerHTML += txt;
-        //     }
-        //   }
-        // }
-        // ,
-        // { x: list_period[4], y: y_akseli[4], z:list_credits[4], indexLabel: list_names[4], name: learning[4], color: list_levels[4], legendText: levelt[4],
-        //   click: function(e){
-        //     var txt = "";
-        //     var index = 4;
-        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
-        //       if (home[index].length>1){
-        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
-        //       }
-        //       else {
-        //         txt += "<li>"+list_names[index]+"</li>"
-        //       }
-        //
-        //       document.getElementById("demo").innerHTML += txt;
-        //     }
-        //   }
-        // }
-        // ,
-        // { x: list_period[5], y: y_akseli[5], z:list_credits[5], indexLabel: list_names[5], name: learning[5], color: list_levels[5], legendText: levelt[5],
-        //   click: function(e){
-        //     var txt = "";
-        //     var index = 5;
-        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
-        //       if (home[index].length>1){
-        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
-        //       }
-        //       else {
-        //         txt += "<li>"+list_names[index]+"</li>"
-        //       }
-        //
-        //       document.getElementById("demo").innerHTML += txt;
-        //     }
-        //   }
-        // }
-        // ,
-        // { x: list_period[6], y: y_akseli[6], z:list_credits[6], indexLabel: list_names[6], name: learning[6], color: list_levels[6], legendText: levelt[6],
-        //   click: function(e){
-        //     var txt = "";
-        //     var index = 6;
-        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
-        //       if (home[index].length>1){
-        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
-        //       }
-        //       else {
-        //         txt += "<li>"+list_names[index]+"</li>"
-        //       }
-        //
-        //       document.getElementById("demo").innerHTML += txt;
-        //     }
-        //   }
-        // },
-  			// { x: list_period[7], y: y_akseli[7], z:list_credits[7], indexLabel: list_names[7], name: learning[7], color: list_levels[7], legendText: levelt[7],
-        //   click: function(e){
-        //     var txt = "";
-        //     var index = 7;
-        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
-        //       if (home[index].length>1){
-        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
-        //       }
-        //       else {
-        //         txt += "<li>"+list_names[index]+"</li>"
-        //       }
-        //
-        //       document.getElementById("demo").innerHTML += txt;
-        //     }
-        //   }
-        // },
-  			// { x: list_period[8], y: y_akseli[8], z:list_credits[8], indexLabel: list_names[8], name: learning[8], color: list_levels[8], legendText: levelt[8],
-        //   click: function(e){
-        //     var txt = "";
-        //     var index = 8;
-        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
-        //       if (home[index].length>1){
-        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
-        //       }
-        //       else {
-        //         txt += "<li>"+list_names[index]+"</li>"
-        //       }
-        //
-        //       document.getElementById("demo").innerHTML += txt;
-        //     }
-        //   }
-        // },
-        // { x: list_period[9], y: y_akseli[9], z:list_credits[9], indexLabel: list_names[9], name: learning[9], color: list_levels[9], legendText: levelt[9],
-        //   click: function(e){
-        //     var txt = "";
-        //     var index = 9;
-        //     if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
-        //       if (home[index].length>1){
-        //         txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
-        //       }
-        //       else {
-        //         txt += "<li>"+list_names[index]+"</li>"
-        //       }
-        //
-        //       document.getElementById("demo").innerHTML += txt;
-        //     }
-        //   }
-        // }
+        ,
+        { x: list_period[3], y: y_akseli[3], z:list_credits[3], indexLabel: list_names[3], name: learning[3], color: list_levels[3], legendText: levelt[3],
+          click: function(e){
+            var txt = "";
+            var index = 3;
+            if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+              if (home[index].length>1){
+                txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+              }
+              else {
+                txt += "<li>"+list_names[index]+"</li>"
+              }
+
+              document.getElementById("demo").innerHTML += txt;
+            }
+          }
+        }
+        ,
+        { x: list_period[4], y: y_akseli[4], z:list_credits[4], indexLabel: list_names[4], name: learning[4], color: list_levels[4], legendText: levelt[4],
+          click: function(e){
+            var txt = "";
+            var index = 4;
+            if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+              if (home[index].length>1){
+                txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+              }
+              else {
+                txt += "<li>"+list_names[index]+"</li>"
+              }
+
+              document.getElementById("demo").innerHTML += txt;
+            }
+          }
+        }
+        ,
+        { x: list_period[5], y: y_akseli[5], z:list_credits[5], indexLabel: list_names[5], name: learning[5], color: list_levels[5], legendText: levelt[5],
+          click: function(e){
+            var txt = "";
+            var index = 5;
+            if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+              if (home[index].length>1){
+                txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+              }
+              else {
+                txt += "<li>"+list_names[index]+"</li>"
+              }
+
+              document.getElementById("demo").innerHTML += txt;
+            }
+          }
+        }
+        ,
+        { x: list_period[6], y: y_akseli[6], z:list_credits[6], indexLabel: list_names[6], name: learning[6], color: list_levels[6], legendText: levelt[6],
+          click: function(e){
+            var txt = "";
+            var index = 6;
+            if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+              if (home[index].length>1){
+                txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+              }
+              else {
+                txt += "<li>"+list_names[index]+"</li>"
+              }
+
+              document.getElementById("demo").innerHTML += txt;
+            }
+          }
+        },
+  			{ x: list_period[7], y: y_akseli[7], z:list_credits[7], indexLabel: list_names[7], name: learning[7], color: list_levels[7], legendText: levelt[7],
+          click: function(e){
+            var txt = "";
+            var index = 7;
+            if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+              if (home[index].length>1){
+                txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+              }
+              else {
+                txt += "<li>"+list_names[index]+"</li>"
+              }
+
+              document.getElementById("demo").innerHTML += txt;
+            }
+          }
+        },
+  			{ x: list_period[8], y: y_akseli[8], z:list_credits[8], indexLabel: list_names[8], name: learning[8], color: list_levels[8], legendText: levelt[8],
+          click: function(e){
+            var txt = "";
+            var index = 8;
+            if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+              if (home[index].length>1){
+                txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+              }
+              else {
+                txt += "<li>"+list_names[index]+"</li>"
+              }
+
+              document.getElementById("demo").innerHTML += txt;
+            }
+          }
+        },
+        { x: list_period[9], y: y_akseli[9], z:list_credits[9], indexLabel: list_names[9], name: learning[9], color: list_levels[9], legendText: levelt[9],
+          click: function(e){
+            var txt = "";
+            var index = 9;
+            if (confirm("Would you take this course?\n \n" + "Course code: " + code[index]+ "\n \n" +list_names[index] + "\n \n"+ "Description: "+ description[index]+ "\n \n"+ "Info: "+tieto[index]+ "\n \n" + "Requirements: "+pre[index])) {
+              if (home[index].length>1){
+                txt += "<li>"+list_names[index]+ " (register at " + home[index]+ ")" +"</li>"
+              }
+              else {
+                txt += "<li>"+list_names[index]+"</li>"
+              }
+
+              document.getElementById("demo").innerHTML += txt;
+            }
+          }
+        }
 
   		]
   	}]
@@ -418,29 +422,32 @@ function mur(courses) {
 }
 
 
-function dataChanged() {
-
+// function dataChanged() {
+//
+//   var lista = getList();
+//   var courses = filter_list(lista);
+//   plot();
+//   return courses;
+//
+// }
+function chartTypeChanged() {
+  plot();
   var lista = getList();
   var courses = filter_list(lista);
-  plot();
-  return courses;
 
-}
-function chartTypeChanged() {
-
-  var courses = dataChanged();
+  // var courses = dataChanged();
   // print_list(courses);
   var chart = mur(courses);
   chart.update();
-  chart.render();
+  // chart.render();
 }
 
-var button = document.getElementById( "mybutton" );
-// button.addEventListener( "click",  chartTypeChanged);
-button.addEventListener('click',() => {
-  dataChanged();
-  chartTypeChanged();
-});
+// var button = document.getElementById( "mybutton" );
+// // button.addEventListener( "click",  chartTypeChanged);
+// button.addEventListener('click',() => {
+//   dataChanged();
+//   chartTypeChanged();
+// });
 
 
 var input = document.getElementById("myText");
@@ -448,7 +455,7 @@ input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
    document.getElementById("mybutton").click();
-   // print_list();
+   chartTypeChanged();
   }
 });
 
