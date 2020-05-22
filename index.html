@@ -133,15 +133,67 @@ function mur(courses) {
 
   for(var i = 0;i < 10; i++){
     list_names.push(courses[i]["name"]);
-    learning.push(courses[i]["learning"]);
-    levelt.push(courses[i]["level"]);
-    tieto.push(courses[i]["tieto"]);
-    pre.push(courses[i]["pre"]);
-    kieli.push(courses[i]["kieli"]);
-    code.push(courses[i]["code"]);
-    home.push(courses[i]["home"]);
-    description.push(courses[i]["description"]);
-    list_credits.push(courses[i]["credit"]);
+    if (courses[i]["learning"].length>0){
+      learning.push(courses[i]["learning"]);
+    }
+    else{
+      learning.push("-");
+    }
+
+    if(courses[i]["level"].length>0){
+      levelt.push(courses[i]["level"]);
+    }
+    else{
+      levelt.push("-");
+    }
+    if (courses[i]["tieto"].length>0){
+      tieto.push(courses[i]["tieto"]);
+    }
+    else{
+      tieto.push("-");
+    }
+    if(courses[i]["pre"].length>0){
+      pre.push(courses[i]["pre"]);
+    }
+    else{
+      pre.push("-");
+    }
+    if (courses[i]["pre"].length>0){
+      pre.push(courses[i]["pre"]);
+    }
+    else {
+      pre.push("-");
+    }
+    if(courses[i]["kieli"].length>0){
+        kieli.push(courses[i]["kieli"]);
+    }
+    else{
+      kieli.push("-");
+    }
+    if(courses[i]["code"].length>0){
+      code.push(courses[i]["code"]);
+    }
+    else{
+      code.push("-");
+    }
+    if(courses[i]["home"].length>0){
+      home.push(courses[i]["home"]);
+    }
+    else{
+      home.push("-");
+    }
+    if(courses[i]["description"].length>0){
+      description.push(courses[i]["description"]);
+    }
+    else{
+      description.push("-");
+    }
+    if (courses[i]["credit"].length>0){
+      list_credits.push(courses[i]["credit"]);
+    }
+    else{
+      list_credits.push("-");
+    }
     if (courses[i]["code"].includes("chem") || courses[i]["code"].includes("ke")|| courses[i]["code"].includes("JOIN")){
       list_levels.push(chem);
     }
@@ -175,7 +227,6 @@ function mur(courses) {
       var arvo = Math.random();
       y_akseli.push(advanced +arvo);
     }
-
     if (courses[i]["period"].includes("Autumn")){
       list_period.push(aut);
     }
