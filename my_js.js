@@ -485,67 +485,42 @@ function filter_list(course_dict){
   return final_list;
 
 }
-
-function print_list(listed_text){
-
-  // var lista = getList();
-  // var listed_text = filter_list(lista);
-
-  var pituus = listed_text.length;
-  var k = '<div>';
-
-   if (listed_text.length > 10){
-     pituus = 10;
-
-   k+= '<div><b>' + "Search results as a list: " + '</b><br></div>';
-   k+= '<div><i>' + "Top 10 of " + listed_text.length + " courses" + '</i><br></div>';
-   k+= '<div>' +'<br>' + '</div>';
-    for(var i = 0;i < pituus; i++){
-      // k+= '<div><strong>' + listed_text + '</strong></div>';
-
-        k+= '<div><strong>' + (i+1) + ") " + listed_text[i]["name"] +  " ("+ listed_text[i]["code"] + ")" +   '</strong></div>';
-        if (listed_text[i]["description"].length>1){
-          k+= '<div>' + listed_text[i]["description"] + '</div>';
-        }
-        // k+= '<div style="color:SlateBlue;">' +"Credits: "+ listed_text[i]["credit"] + '</style></div>';
-        // if (listed_text[i]["level"].length>1){
-        //   k+= '<div style="color:DarkBlue;">' +"Course level: "+ listed_text[i]["level"] + '</style></div>';
-        // }
-        // if (listed_text[i]["tieto"].length>1){
-        //   k+= '<div style="color:DarkBlue;">' + listed_text[i]["tieto"] + '</style></div>';
-        // }
-        if (listed_text[i]["period"].length>1){
-          k+= '<div style="color:Gray;">' +"Starts in period "+ listed_text[i]["period"] + '</style></div>';
-        }
-
-        k+= '<div>' +'<br>' + '</div>';
-    }   }
-    else {
-      k+= '<div><b>' + "Results as a list: " + '</b><br></div>';
-      k+= '<div><i>' + "There was only " + listed_text.length + " courses" + '</i><br></div>';
-      k+= '<div>' +'<br>' + '</div>';
-       for(var i = 0;i < pituus; i++){
-         // k+= '<div><strong>' + listed_text + '</strong></div>';
-
-           k+= '<div><strong>' + (i+1) + ") " + listed_text[i]["name"] +  " ("+ listed_text[i]["code"] + ")" +   '</strong></div>';
-           // if (listed_text[i]["learning"].length>1){
-           //   k+= '<div>' + "Requirements: " + listed_text[i]["pre"] + '</div>';
-           // }
-           // k+= '<div style="color:SlateBlue;">' +"Credits: "+ listed_text[i]["credit"] + '</style></div>';
-           // if (listed_text[i]["level"].length>1){
-           //   k+= '<div style="color:DarkBlue;">' +"Course level: "+ listed_text[i]["level"] + '</style></div>';
-           // }
-           // if (listed_text[i]["tieto"].length>1){
-           //   k+= '<div style="color:DarkBlue;">' + listed_text[i]["tieto"] + '</style></div>';
-           // }
-           // if (listed_text[i]["period"].length>1){
-           //   k+= '<div style="color:Gray;">' +"Starts: "+ listed_text[i]["period"] + '</style></div>';
-           // }
-
-           k+= '<div>' +'<br>' + '</div>';
-       }
-    }
-    k+='</div>';
-   document.getElementById('printed_list').innerHTML = k;
-
-}
+//
+// function print_list(listed_text){
+//
+//   // var lista = getList();
+//   // var listed_text = filter_list(lista);
+//
+//   var pituus = listed_text.length;
+//   var k = '<div>';
+//
+//    if (listed_text.length > 10){
+//      pituus = 10;
+//    }
+//    k+= '<div><b>' + "Search results as a list: " + '</b><br></div>';
+//    k+= '<div><i>' + "Top 10 of " + listed_text.length + " courses" + '</i><br></div>';
+//    k+= '<div>' +'<br>' + '</div>';
+//     for(var i = 0;i < pituus; i++){
+//       // k+= '<div><strong>' + listed_text + '</strong></div>';
+//
+//         k+= '<div><strong>' + (i+1) + ") " + listed_text[i]["name"] +  " ("+ listed_text[i]["code"] + ")" +   '</strong></div>';
+//         if (listed_text[i]["description"].length>1){
+//           k+= '<div>' + listed_text[i]["description"] + '</div>';
+//         }
+//         // k+= '<div style="color:SlateBlue;">' +"Credits: "+ listed_text[i]["credit"] + '</style></div>';
+//         // if (listed_text[i]["level"].length>1){
+//         //   k+= '<div style="color:DarkBlue;">' +"Course level: "+ listed_text[i]["level"] + '</style></div>';
+//         // }
+//         // if (listed_text[i]["tieto"].length>1){
+//         //   k+= '<div style="color:DarkBlue;">' + listed_text[i]["tieto"] + '</style></div>';
+//         // }
+//         if (listed_text[i]["period"].length>1){
+//           k+= '<div style="color:Gray;">' +"Starts in period "+ listed_text[i]["period"] + '</style></div>';
+//         }
+//
+//         k+= '<div>' +'<br>' + '</div>';
+//     }
+//     k+='</div>';
+//    document.getElementById('printed_list').innerHTML = k;
+//
+// }
